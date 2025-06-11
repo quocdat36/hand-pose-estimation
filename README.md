@@ -2,7 +2,7 @@
 
 This project presents a comprehensive web application for real-time 2D hand pose estimation, allowing for a direct comparison between different deep learning models and architectures. The application is built with Streamlit, providing an interactive and user-friendly interface.
 
-![Project Demo GIF](demo.gif)
+[![Project Demo GIF](demo.gif)](https://drive.google.com/drive/folders/1lE4-MoDBO1UR-2NBPmp2nVe-3_IhjrNG?usp=sharing)
 
 ## 🌟 Key Features
 
