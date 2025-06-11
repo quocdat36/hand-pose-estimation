@@ -1,1 +1,0 @@
-Put the downloaded FreiHAND_evaluate dataset here

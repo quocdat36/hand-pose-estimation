@@ -4,7 +4,7 @@ MODEL:
   BATCH_SIZE: 8
   NUM_JOINTS: 21
   PRETRAIN_WEIGHT:
-    HM_NET_PATH: "./model/trained_models/net_hm.pth"
+    HM_NET_PATH: "weights/posenetwork/net_hm.pth"
 EVAL:
   SAVE_DIR: "./output"
   SAVE_BATCH_IMAGES_PRED: True

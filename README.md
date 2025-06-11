@@ -1,83 +1,116 @@
-# Hand Pose Estimation
+# Real-time Hand Pose Estimation: A Comparative Study
 
-<p align="center">
-  <img src=demo.gif/ width="50%" height="auto">
-</p>
+This project presents a comprehensive web application for real-time 2D hand pose estimation, allowing for a direct comparison between different deep learning models and architectures. The application is built with Streamlit, providing an interactive and user-friendly interface.
 
-## Introduction
+![Project Demo GIF](demo.gif)
 
-This is a project we built for the Hand Pose Estimation problem. In this project, we tested the Stacked Hourglass Network model (a fairly well-known model used for Human Pose Estimation). In addition, we switched from the usual bottom-up method to the top-down by adding a hand-detect module. Here is the architecture model we use:
+## 🌟 Key Features
 
-<p align="center">
-  <img src=method.png/>
-</p>
+- **Multi-Model Comparison:** Switch seamlessly between three distinct models in real-time:
+    1.  **MediaPipe Hands:** Google's high-performance, industry-standard solution, serving as the benchmark.
+    2.  **PoseNetwork (Hourglass):** A deep, accuracy-focused model based on the Stacked Hourglass Network architecture, running on GPU via PyTorch.
+    3.  **MobileNetV2:** A lightweight, performance-focused model designed for efficiency, running on CPU via OpenCV's DNN module.
 
-## Prepare the environment
+- **Multiple Input Sources:** Supports:
+    - Live Webcam Feed
+    - Image Upload
+    - Video Upload
 
-1. python==3.8.16
-2. Install PyTorch-cuda==11.7 following [official instruction](https://pytorch.org/):
+- **Implemented Improvements:**
+    - **Configurable Confidence Threshold:** An interactive slider allows users to adjust the detection confidence threshold for the MobileNetV2 model, directly demonstrating the precision-recall tradeoff.
+    - **Performance Optimization:** Input frames for the MobileNetV2 model are resized to a smaller dimension, significantly reducing computational load and latency for a smoother real-time experience.
 
-        conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-        
-3. Install the necessary dependencies by running:
+## 🛠️ Project Structure
 
-        pip install -r requirements.txt 
-
-## Prepare the dataset
-
-Please organize your datasets for training and testing following this structure: 
+The project is organized with a clean and modular structure to separate concerns, making it easy to maintain and extend.
 
 ```
-Main-folder/
-│
-├── data/ 
-│   ├── FreiHAND_pub_v2 - This folder contains data for training model
-|   |   ├── ...
-|   |
-│   └── FreiHAND_pub_v2_eval - public test images
-|       ├── ...
-|
-└── ...
+hand-pose-estimation/
+├── app.py              # The main Streamlit web application
+├── configs/            # Configuration files (.yaml) for models
+├── data/               # Placeholder for FreiHAND dataset (not included in repo)
+├── notebooks/          # Jupyter notebooks for experimentation
+├── scripts/            # Scripts for training and evaluation
+├── src/                # Main source code package
+│   ├── __init__.py
+│   ├── model_hourglass/
+│   └── model_mobilenet/
+├── weights/            # Pre-trained model weights
+├── .gitignore          # Specifies files to be ignored by Git
+├── README.md           # This file
+└── requirements.txt    # Python dependencies
 ```
 
-1. Put the downloaded [FreiHAND](https://github.com/lmb-freiburg/freihand) dataset in **./data/**
+## 🚀 Setup & Installation
 
-Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2.zip
+Follow these steps to set up and run the project locally.
 
-2. Put the downloaded [FreiHAND](https://github.com/lmb-freiburg/freihand) evaluation set in **./data/**
+### Prerequisites
 
-Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2_eval.zip
+- Python 3.8+
+- NVIDIA GPU with CUDA drivers installed (for PoseNetwork GPU acceleration)
+- Git
 
-## Running the code
+### Installation Steps
 
-### Training
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/quocdat36/hand-pose-estimation.git
+    cd hand-pose-estimation
+    ```
 
-In this project, we focus on training Stacked Hourglass Network. As for the hand detect module, we'd like to use the victordibia's pretrained_model (SSD) without further modification. Train the hourglass network:
+2.  **Create and activate a virtual environment:**
+    ```bash
+    # Create the virtual environment
+    python -m venv venv
 
-    python 1.train.py --config-file "configs/train_FreiHAND_dataset.yaml"
-    
-The trained model weights (net_hm.pth) will be at **Main-folder/**. Copy and paste the trained model into **./model/trained_models** before evaluate.
+    # Activate it (on Windows)
+    .\venv\Scripts\activate
+    ```
 
-### Evaluation
+3.  **Install dependencies:**
+    The project requires specific versions of libraries like PyTorch for GPU support. It's recommended to install them manually first, then install the rest.
 
-Evaluate on FreiHAND dataset:
+    ```bash
+    # 1. Install PyTorch with GPU support (example for CUDA 11.8)
+    # Please visit the official PyTorch website for the command matching your system.
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-    python 2.evaluate_FreiHAND.py --config-file "configs/eval_FreiHAND_dataset.yaml"
-    
-The visualization results will be saved to **./output/**
+    # 2. Install the remaining packages
+    pip install -r requirements.txt
+    ```
 
-### Real-time hand pose estimation
+## 🖥️ Usage
 
-Prepare a camera with and clear angle, good light, and less noisy space. Run the following command line:
+### Running the Web Application
 
-    python 3.real_time_2D_hand_pose_estimation.py --config-file "configs/eval_webcam.yaml"
-    
-_Note: Our model only solves the one-handed recognition problem. If there are 2 or more hands, the model will randomly select one hand to predict. To predict multiple hands, please edit the file 3.real_time_2D_hand_pose_estimation.py (because of resource and time limitations, we don't do this part)._
+To launch the interactive comparison tool, simply run the following command in your terminal:
 
-### Addition
+```bash
+streamlit run app.py
+```
 
-To fine-tune the hyperparameters (BATCH_SIZE, NUM_WORKERS, DATA_SIZE, ...), you can edit the .yaml files in the **./configs/** directory.
+Navigate to the local URL provided (usually `http://localhost:8501`) in your web browser.
 
-## Acknowledgment
+### Using the Interface
 
-The repo is developed based on [victordibia](https://github.com/victordibia/handtracking) and [enghock1](https://github.com/enghock1/Real-Time-2D-and-3D-Hand-Pose-Estimation). Thanks for your contribution.
+- **Select Input Source:** Use the radio buttons in the sidebar to choose between Webcam, Image Upload, or Video Upload.
+- **Select Model:** Switch between `MediaPipe`, `PoseNetwork (Hourglass)`, and `MobileNetV2 (Lightweight)` to see their performance Unterschiede in real-time.
+- **Adjust Confidence Threshold:** When `MobileNetV2` is selected, use the slider to see how changing the confidence threshold affects the number and accuracy of detected keypoints.
+
+## 🔬 Model Training & Evaluation (Optional)
+
+The scripts for training the PoseNetwork model are included.
+
+- **Configuration:** Modify the `.yaml` files in the `configs/` directory to adjust hyperparameters like learning rate, batch size, etc.
+- **Training:** To fine-tune or retrain the PoseNetwork model on the FreiHAND dataset, run:
+    ```bash
+    python scripts/train_posenetwork.py
+    ```
+- **Evaluation:** To evaluate the model on the FreiHAND evaluation set, use:
+    ```bash
+    python scripts/evaluate_freihand.py
+    ```
+
+---
+*This project was developed as part of a Computer Vision course, demonstrating the integration, comparison, and improvement of various deep learning models for hand pose estimation.*

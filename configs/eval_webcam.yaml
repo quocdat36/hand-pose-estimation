@@ -3,5 +3,8 @@ MODEL:
   NUM_WORKERS: 2
   BATCH_SIZE: 8
   NUM_JOINTS: 21
+  HAND_DETECTOR_MODEL: 'weights/posenetwork/frozen_inference_graph.pb'
   PRETRAIN_WEIGHT:
-    HM_NET_PATH: "./model/trained_models/net_hm.pth"
+    HM_NET_PATH: 'weights/posenetwork/net_hm.pth'
+    MESH_NET_PATH: 'weights/posenetwork/net_mesh_pose.pth'
+    FEAT_NET_PATH: 'weights/posenetwork/net_feat_mesh.pth'

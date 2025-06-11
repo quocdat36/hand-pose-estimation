@@ -4,8 +4,10 @@ MODEL:
   BATCH_SIZE: 8
   NUM_JOINTS: 21
   PRETRAIN_WEIGHT:
-    HM_NET_PATH: "./model/trained_models/net_hm.pth"
+    HM_NET_PATH: "weights/posenetwork/net_hm_to_finetune.pth"
+
 TRAIN:
   DATASET: "FreiHAND_train"
   BACKGROUND_SET: 0
   DATA_SIZE: 32000
+  LR: 0.0001  # <<< THÊM DÒNG NÀY VÀO. Tốc độ học nhỏ cho fine-tuning.
