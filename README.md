@@ -67,6 +67,7 @@ Follow these steps to set up and run the project locally.
     python -m venv venv
 
     # Activate it (on Windows)
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
     .\venv\Scripts\activate
     ```
 
