@@ -23,7 +23,7 @@ This project presents a comprehensive web application for real-time 2D hand pose
 ## 🛠️ Project Structure
 
 The project is organized with a clean and modular structure to separate concerns, making it easy to maintain and extend.
-- **[Download Weights from Google Drive]([https://drive.google.com/drive/folders/1a2b3c4d5e6f7g8h9i0j?usp=sharing](https://drive.google.com/drive/folders/1lE4-MoDBO1UR-2NBPmp2nVe-3_IhjrNG?usp=sharing))** 
+- [Download Weights from Google Drive]([https://drive.google.com/drive/folders/1a2b3c4d5e6f7g8h9i0j?usp=sharing](https://drive.google.com/drive/folders/1lE4-MoDBO1UR-2NBPmp2nVe-3_IhjrNG?usp=sharing))
 
 After downloading and unzipping, ensure your project structure looks like this:
 ```
