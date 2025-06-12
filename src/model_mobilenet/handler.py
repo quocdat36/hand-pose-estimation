@@ -1,17 +1,9 @@
-# FILE: src/model_mobilenet/handler.py
+# FILE: src/model_mobilenet/handler.py (Đã có Cải tiến 1)
 
 import cv2
 import numpy as np
 
 def process_frame_with_mobilenet(net, image_bgr, threshold=0.1):
-    # --- PHẦN CẢI TIẾN TỐC ĐỘ ---
-    image_height_orig, image_width_orig, _ = image_bgr.shape
-    # Giữ nguyên tỉ lệ, đặt chiều rộng tối đa là 480 pixels
-    target_width = 480
-    scale_ratio = target_width / image_width_orig
-    target_height = int(image_height_orig * scale_ratio)
-    image_for_model = cv2.resize(image_bgr, (target_width, target_height))
-    #End
     annotated_image = image_bgr.copy()
     image_height, image_width, _ = annotated_image.shape
     
@@ -29,21 +21,18 @@ def process_frame_with_mobilenet(net, image_bgr, threshold=0.1):
     points = []
     for i in range(22):
         probMap = output[0, i, :, :]
-        probMap = cv2.resize(probMap, (image_width_orig, image_height_orig))
+        probMap = cv2.resize(probMap, (image_width, image_height))
         _, prob, _, point = cv2.minMaxLoc(probMap)
         
-        # Sử dụng tham số threshold
+        # SỬ DỤNG THAM SỐ THRESHOLD
         if prob > threshold:
             points.append((int(point[0]), int(point[1])))
         else:
             points.append(None)
     
     POSE_PAIRS = [ 
-        [0,1],[1,2],[2,3],[3,4],
-        [0,5],[5,6],[6,7],[7,8],
-        [0,9],[9,10],[10,11],[11,12],
-        [0,13],[13,14],[14,15],[15,16],
-        [0,17],[17,18],[18,19],[19,20] 
+        [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],
+        [0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] 
     ]
     for pair in POSE_PAIRS:
         partA, partB = pair[0], pair[1]

@@ -6,8 +6,11 @@ from __future__ import unicode_literals
 import argparse
 import os.path as osp
 import torch
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.model_hourglass.configs import cfg
+from src.model_hourglass.config import cfg
 from src.model_hourglass.model.pose_network import PoseNetwork
 from src.model_hourglass.data.build import build_dataset
 
@@ -45,7 +48,7 @@ def main():
     model = PoseNetwork(cfg)
     device = cfg.MODEL.DEVICE
     model.to(device)
-    model.load_model(cfg)
+    model.load_model()
 
     # Load data
     dataset_val = build_dataset(cfg.EVAL.DATASET)

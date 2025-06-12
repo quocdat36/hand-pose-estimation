@@ -1,0 +1,39 @@
+2025-06-12 10:38:49,545 hand_shape_pose_inference INFO: EVAL:
+  DATASET: FreiHAND_test
+  PRINT_FREQ: 40
+  SAVE_BATCH_IMAGES_PRED: True
+  SAVE_DIR: ./output
+  SAVE_POSE_ESTIMATION: True
+GRAPH:
+  TEMPLATE_PATH: ./data/0214_lowP_vn_g.0001.obj
+MODEL:
+  BATCH_SIZE: 8
+  DEVICE: cuda:0
+  HAND_DETECTOR_MODEL: weights/posenetwork/frozen_inference_graph.pb
+  HOURGLASS:
+    NUM_FEAT_CHANNELS: 256
+    NUM_MODULES: 2
+    NUM_STAGES: 2
+  NUM_JOINTS: 21
+  NUM_WORKERS: 2
+  PRETRAIN_WEIGHT:
+    HM_NET_PATH: weights/posenetwork/net_hm.pth
+TRAIN:
+  BACKGROUND_SET: 0
+  DATASET: 
+  DATA_SIZE: 32960
+2025-06-12 10:38:50,339 hand_shape_pose_inference INFO: Evaluate on 3960 frames:
+2025-06-12 10:38:59,063 hand_shape_pose_inference INFO: Saving image: ./output\pred_0.jpg
+2025-06-12 10:39:01,756 hand_shape_pose_inference INFO: Saving image: ./output\pred_40.jpg
+2025-06-12 10:39:04,438 hand_shape_pose_inference INFO: Saving image: ./output\pred_80.jpg
+2025-06-12 10:39:07,212 hand_shape_pose_inference INFO: Saving image: ./output\pred_120.jpg
+2025-06-12 10:39:09,888 hand_shape_pose_inference INFO: Saving image: ./output\pred_160.jpg
+2025-06-12 10:39:12,687 hand_shape_pose_inference INFO: Saving image: ./output\pred_200.jpg
+2025-06-12 10:39:15,359 hand_shape_pose_inference INFO: Saving image: ./output\pred_240.jpg
+2025-06-12 10:39:18,036 hand_shape_pose_inference INFO: Saving image: ./output\pred_280.jpg
+2025-06-12 10:39:20,752 hand_shape_pose_inference INFO: Saving image: ./output\pred_320.jpg
+2025-06-12 10:39:23,444 hand_shape_pose_inference INFO: Saving image: ./output\pred_360.jpg
+2025-06-12 10:39:25,985 hand_shape_pose_inference INFO: Saving image: ./output\pred_400.jpg
+2025-06-12 10:39:28,488 hand_shape_pose_inference INFO: Saving image: ./output\pred_440.jpg
+2025-06-12 10:39:30,968 hand_shape_pose_inference INFO: Saving image: ./output\pred_480.jpg
+Mean Average RMSE: 35.55889129638672
