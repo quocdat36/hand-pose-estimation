@@ -2,7 +2,7 @@
 
 This project presents a comprehensive web application for real-time 2D hand pose estimation, allowing for a direct comparison between different deep learning models and architectures. The application is built with Streamlit, providing an interactive and user-friendly interface.
 
-![Project Demo GIF](demo.gif)
+[![Project Demo GIF](demo.gif)](https://drive.google.com/drive/folders/1lE4-MoDBO1UR-2NBPmp2nVe-3_IhjrNG?usp=sharing)
 
 ## 🌟 Key Features
 
@@ -23,7 +23,9 @@ This project presents a comprehensive web application for real-time 2D hand pose
 ## 🛠️ Project Structure
 
 The project is organized with a clean and modular structure to separate concerns, making it easy to maintain and extend.
+- **[Download Weights from Google Drive]**([https://drive.google.com/drive/folders/1a2b3c4d5e6f7g8h9i0j?usp=sharing](https://drive.google.com/drive/folders/1lE4-MoDBO1UR-2NBPmp2nVe-3_IhjrNG?usp=sharing))
 
+After downloading and unzipping, ensure your project structure looks like this:
 ```
 hand-pose-estimation/
 ├── app.py              # The main Streamlit web application
@@ -65,6 +67,7 @@ Follow these steps to set up and run the project locally.
     python -m venv venv
 
     # Activate it (on Windows)
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
     .\venv\Scripts\activate
     ```
 
